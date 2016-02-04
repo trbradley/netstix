@@ -7,7 +7,11 @@ install:
   - npm install
 before_script:
   - sleep 5
+  - "sh -e /etc/init.d/xvfb start"
+  - webdriver-manager update --standalone
   - webdriver-manager start
   - npm run start-test
+  - sleep 5
 script:
   - npm test --single-run
+  - node_modules/.bin/protractor test/e2e/conf.js --browser=firefox
