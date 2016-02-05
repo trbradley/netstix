@@ -1,11 +1,10 @@
-var express = require('express');
-var router = express.Router({ mergeParams: true });
-
 var Submission = require('../models/submission');
 var User = require('../models/user');
 var Achievement = require('../models/achievement');
 
-router.post('/', function(req, res) {
+var controller = {};
+
+controller.create = function(req, res) {
   var submission = new Submission();
   submission.link = req.body.link;
   submission.comment = req.body.comment;
@@ -24,6 +23,7 @@ router.post('/', function(req, res) {
         if(err) {
           res.send(err);
         }
+        user.score += achievement.points;
         submission.user = user.id;
         user.submissions.push(submission.id);
         user.save(function(err) {
@@ -40,6 +40,6 @@ router.post('/', function(req, res) {
       });
     });
   });
-});
+};
 
-module.exports = router;
+module.exports = controller;
