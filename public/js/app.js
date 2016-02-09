@@ -1,4 +1,9 @@
-var netstix = angular.module('Netstix', ['ngResource', 'ngRoute']);
+var netstix = angular.module('Netstix', [
+                                          'ngResource',
+                                          'ngRoute',
+                                          'ui.bootstrap',
+                                          'angular-loading-bar'
+                                        ]);
 
 netstix.config(['$routeProvider',
   function($routeProvider) {
